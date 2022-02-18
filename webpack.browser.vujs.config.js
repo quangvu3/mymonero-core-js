@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2019, MyMonero.com
+// Copyright (c) 2019, Sumokoin Projects
 //
 // All rights reserved.
 //
@@ -26,36 +26,13 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 //
-"use strict";
+"use strict"
 //
-const JSBigInt = require("../cryptonote_utils/biginteger").BigInteger;
+const merge = require('webpack-merge')
+const common = require('./webpack.config.browser.common.js')
 //
-module.exports = {
-	// Number of atomic units in one unit of currency. e.g. 9 => 10^9 = 1000000000
-	coinUnitPlaces: 9,
-
-	// Minimum number of confirmations for a transaction to show as confirmed
-	txMinConfirms: 10,
-
-	// Currency symbol
-	coinSymbol: "SUMO",
-
-	// OpenAlias prefix
-	openAliasPrefix: "sumo",
-
-	// Currency name
-	coinName: "Sumokoin",
-
-	// Payment URI Prefix
-	coinUriPrefix: "sumo:",
-
-	// Dust threshold in atomic units
-	// 1*10^7 used for choosing outputs/change - we decompose all the way down if the receiver wants now regardless of threshold
-	dustThreshold: new JSBigInt("10000000"),
-
-	// Maximum block number, used for tx unlock time
-	maxBlockNumber: 500000000,
-
-	// Average block time in seconds, used for unlock time estimation
-	avgBlockTime: 240,
-};
+// const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+//
+module.exports = merge(common, {
+	output: { globalObject: 'this' }
+})
